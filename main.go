@@ -1,21 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 )
 
 func main() {
-	// Registrando la ruta y el handler(saludar)
-	http.HandleFunc("/saludar", saludar)
-	http.HandleFunc("/despedir", despedir)
+	fs := http.FileServer(http.Dir("public"))
+	http.Handle("/", fs)
+	log.Println("Servidor iniciado en http://127.0.0.1:8080")
 	http.ListenAndServe(":8080", nil)
-}
-
-func saludar(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hola mundo")
-}
-
-func despedir(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hasta luego")
 }

@@ -1,6 +1,6 @@
 package main
 
-import "github.com/EDteam/golang-api/clase-4/funciones"
+import "github.com/sjaureguio/golang-api/clase-4/funciones"
 
 func execute(name string, f funciones.MyFunction) {
 	f(name)

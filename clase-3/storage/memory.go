@@ -8,13 +8,13 @@ import (
 
 // Memory .
 type Memory struct {
-	currentID uint
-	Persons   map[uint]model.Person
+	currentID int
+	Persons   map[int]model.Person
 }
 
 // NewMemery return a instance of Memory
 func NewMemery() Memory {
-	persons := make(map[uint]model.Person)
+	persons := make(map[int]model.Person)
 
 	return Memory{
 		currentID: 0,
@@ -35,7 +35,7 @@ func (m *Memory) Create(person *model.Person) error {
 }
 
 // Update .
-func (m *Memory) Update(ID uint, person *model.Person) error {
+func (m *Memory) Update(ID int, person *model.Person) error {
 	if person == nil {
 		return model.ErrPersonCanNotBeNil
 	}
@@ -50,7 +50,7 @@ func (m *Memory) Update(ID uint, person *model.Person) error {
 }
 
 // Delete borra de la memoria la persona
-func (m *Memory) Delete(ID uint) error {
+func (m *Memory) Delete(ID int) error {
 	if _, ok := m.Persons[ID]; !ok {
 		return fmt.Errorf("ID: %d: %w", ID, model.ErrIDPersonDoesNotExists)
 	}
@@ -61,14 +61,14 @@ func (m *Memory) Delete(ID uint) error {
 }
 
 // GetByID retorna una persona por el ID
-func (m *Memory) GetByID(ID uint) (model.Person, error) {
-	person, ok := m.Persons[ID]
-	if !ok {
-		return person, fmt.Errorf("ID: %d: %w", ID, model.ErrIDPersonDoesNotExists)
-	}
+// func (m *Memory) GetByID(ID int) (model.Person, error) {
+// 	person, ok := m.Persons[ID]
+// 	if !ok {
+// 		return person, fmt.Errorf("ID: %d: %w", ID, model.ErrIDPersonDoesNotExists)
+// 	}
 
-	return person, nil
-}
+// 	return person, nil
+// }
 
 // GetAll retorna todas las personas que están en la memoria
 func (m *Memory) GetAll() (model.Persons, error) {
